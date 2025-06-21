@@ -1,13 +1,19 @@
 createdb:
-	docker exec -it -u 0 173d0f825da5 psql -c "CREATE DATABASE simple_bank;"
+	docker exec -it -u 0 173d0f825da5 createdb --username=root --owner=root simple_bank"
 
 dropdb:
-	docker exec -it -u 0 173d0f825da5 psql -c "DROP DATABASE simple_bank;"
+	docker exec -it -u 0 173d0f825da5 dropdb simple_bank"
 	
-databases:
-	docker exec -it -u 0 173d0f825da5 psql -c "\l"
-
 dev:
 	air
 
-.PHONY: createdb dropdb databases dev
+postgres:
+	docker run --name simple_bank -e POSTGRES_PASSWORD=mypwd -e POSTGRES_USER=root -p 5432:5432 -d postgres:17.5-alpine
+
+migrateup:
+	migrate -path migration -database "postgresql://root:mypwd@localhost:5432/simple_bank?sslmode=disable" -verbose up
+
+migratedown:
+	migrate -path migration -database "postgresql://root:mypwd@localhost:5432/simple_bank?sslmode=disable" -verbose down
+
+.PHONY: createdb dropdb dev postgres migrateup migratedown
