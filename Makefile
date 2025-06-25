@@ -10,10 +10,10 @@ postgres:
 	docker run --name simple_bank -e POSTGRES_PASSWORD=mypwd -e POSTGRES_USER=root -p 5432:5432 -d postgres:17.5-alpine
 
 migrateup:
-	migrate -path sqlc/migrations/ -database "postgresql://root:mypwd@localhost:5432/simple_bank?sslmode=disable" -verbose up
+	migrate -path internal/db/sqlc/migrations/ -database "postgresql://root:mypwd@localhost:5432/simple_bank?sslmode=disable" -verbose up
 
 migratedown:
-	migrate -path sqlc/migrations/ -database "postgresql://root:mypwd@localhost:5432/simple_bank?sslmode=disable" -verbose down
+	migrate -path internal/db/sqlc/migrations/ -database "postgresql://root:mypwd@localhost:5432/simple_bank?sslmode=disable" -verbose down
 
 sqlc:
 	sqlc generate

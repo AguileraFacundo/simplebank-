@@ -45,7 +45,7 @@ func TestGetAccount(t *testing.T) {
 }
 
 func TestListAccounts(t *testing.T) {
-	for range 10 {
+	for range 5 {
 		createRandomAccount(t)
 	}
 

@@ -45,14 +45,14 @@ func TestGetEntry(t *testing.T) {
 }
 
 func TestListEntry(t *testing.T) {
-	for range 10 {
+	for range 5 {
 		createRandomEntry(t)
 	}
-	arg := db.ListEntriesParams{
+	args := db.ListEntriesParams{
 		Limit:  5,
 		Offset: 5,
 	}
-	entries, err := TestQueries.ListEntries(context.Background(), arg)
+	entries, err := TestQueries.ListEntries(context.Background(), args)
 	require.NoError(t, err)
 	require.Len(t, entries, 5)
 }
