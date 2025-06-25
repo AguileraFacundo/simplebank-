@@ -1,4 +1,4 @@
-package db
+package test
 
 import (
 	"database/sql"
@@ -6,6 +6,7 @@ import (
 	"os"
 	"testing"
 
+	"github.com/leoneIAguilera/simple_bank/internal/db"
 	_ "github.com/lib/pq"
 )
 
@@ -14,15 +15,19 @@ const (
 	db_driver = "postgres"
 )
 
-var TestQueries *Queries
+var TestQueries *db.Queries
 
-func TestMain(m *testing.M) {
+func connectDb(m *testing.M) {
 
 	conn, err := sql.Open(db_driver, db_url)
 
 	if err != nil {
 		log.Fatal("cannot connect to database", err)
 	}
-	TestQueries = New(conn)
+	TestQueries = db.New(conn)
 	os.Exit(m.Run())
+}
+
+func TestMain(m *testing.M) {
+	connectDb(m)
 }
