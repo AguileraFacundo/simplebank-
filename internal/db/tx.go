@@ -2,7 +2,6 @@ package db
 
 import (
 	"context"
-	"fmt"
 )
 
 type TransferTxParams struct {
@@ -21,9 +20,10 @@ type TransferTxResults struct {
 
 func (s *Store) TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResults, error) {
 	var result TransferTxResults
+
 	err := s.execTx(ctx, func(q *Queries) error {
 		var err error
-		//Create Transfer
+
 		result.Transfer, err = q.CreateTransfer(ctx, CreateTransferParams{
 			FromAccountID: arg.FromAccountID,
 			ToAccountID:   arg.ToAccountID,
@@ -31,7 +31,7 @@ func (s *Store) TransferTx(ctx context.Context, arg TransferTxParams) (TransferT
 		})
 
 		if err != nil {
-			return fmt.Errorf("Failed to create transfer %w", err)
+			return err
 		}
 
 		result.FromEntry, err = q.CreateEntry(ctx, CreateEntryParams{
@@ -51,7 +51,7 @@ func (s *Store) TransferTx(ctx context.Context, arg TransferTxParams) (TransferT
 		if err != nil {
 			return err
 		}
-		return err
+		return nil
 	})
 
 	return result, err
