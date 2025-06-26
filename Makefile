@@ -1,7 +1,7 @@
 createdb:
-	docker exec -it 173d0f825da5 createdb --username=root --owner=root simple_bank
+	docker exec -it 0256013f0eee createdb --username=root --owner=root simple_bank
 dropdb:
-	docker exec -it 173d0f825da5 dropdb simple_bank
+	docker exec -it 0256013f0eee dropdb simple_bank
 	
 dev:
 	air
