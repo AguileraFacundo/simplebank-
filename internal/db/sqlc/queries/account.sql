@@ -9,7 +9,8 @@ INSERT INTO accounts (
 -- name: GetAccount :one
 SELECT * FROM accounts
 WHERE ID = $1 
-LIMIT 1;
+LIMIT 1
+FOR NO KEY UPDATE;
 
 
 -- name: ListAccounts :many
