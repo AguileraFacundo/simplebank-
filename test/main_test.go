@@ -15,16 +15,19 @@ const (
 	db_driver = "postgres"
 )
 
-var TestQueries *db.Queries
+var (
+	testDB      *sql.DB
+	TestQueries *db.Queries
+)
 
 func connectDb(m *testing.M) {
-
-	conn, err := sql.Open(db_driver, db_url)
+	var err error
+	testDB, err = sql.Open(db_driver, db_url)
 
 	if err != nil {
 		log.Fatal("cannot connect to database", err)
 	}
-	TestQueries = db.New(conn)
+	TestQueries = db.New(testDB)
 	os.Exit(m.Run())
 }
 
