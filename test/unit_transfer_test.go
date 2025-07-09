@@ -11,9 +11,9 @@ import (
 
 func createRandomTransfer(t *testing.T) db.Transfer {
 	arg := db.CreateTransferParams{
-		FromAccountID: util.CreateRandomNumber(1, 5),
-		ToAccountID:   util.CreateRandomNumber(1, 5),
-		Amount:        util.CreateRandomMoney(),
+		FromAccountID: util.RandomNumber(1, 5),
+		ToAccountID:   util.RandomNumber(1, 5),
+		Amount:        util.RandomMoney(),
 	}
 
 	transfer, err := TestQueries.CreateTransfer(context.Background(), arg)

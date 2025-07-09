@@ -11,8 +11,8 @@ import (
 
 func createRandomEntry(t *testing.T) db.Entry {
 	arg := db.CreateEntryParams{
-		AccountID: util.CreateRandomNumber(1, 20),
-		Amount:    util.CreateRandomMoney(),
+		AccountID: util.RandomNumber(1, 5),
+		Amount:    util.RandomMoney(),
 	}
 	entry, err := TestQueries.CreateEntry(context.Background(), arg)
 	require.NoError(t, err)
@@ -64,7 +64,7 @@ func TestUpdateEntry(t *testing.T) {
 
 	arg := db.UpdateEntryParams{
 		ID:     entry.ID,
-		Amount: util.CreateRandomMoney(),
+		Amount: util.RandomMoney(),
 	}
 
 	update, err := TestQueries.UpdateEntry(context.Background(), arg)

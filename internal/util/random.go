@@ -12,11 +12,11 @@ func init() {
 	rand.NewSource(time.Now().UnixNano())
 }
 
-func CreateRandomNumber(min, max int64) int64 {
+func RandomNumber(min, max int64) int64 {
 	return min + rand.Int63n(max-min+1)
 }
 
-func createRandomString(n int64) string {
+func RandomString(n int64) string {
 	var sb strings.Builder
 	k := len(alphabet)
 
@@ -28,17 +28,17 @@ func createRandomString(n int64) string {
 	return sb.String()
 }
 
-func CreateRandomCurrencies() string {
+func RandomCurrencies() string {
 	currencies := []string{"USD", "EUR", "ARS"}
 	n := len(currencies)
 	return currencies[rand.Intn(n)]
 
 }
 
-func CreateRandomMoney() int64 {
-	return CreateRandomNumber(10, 1000)
+func RandomMoney() int64 {
+	return RandomNumber(10, 1000)
 }
 
-func CreateRandomOwner() string {
-	return createRandomString(6)
+func RandomOwner() string {
+	return RandomString(6)
 }

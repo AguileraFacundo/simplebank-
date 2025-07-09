@@ -12,9 +12,9 @@ import (
 
 func CreateRandomAccount(t *testing.T) db.Account {
 	arg := db.CreateAccountParams{
-		Owner:    util.CreateRandomOwner(),
-		Balance:  util.CreateRandomMoney(),
-		Currency: util.CreateRandomCurrencies(),
+		Owner:    util.RandomOwner(),
+		Balance:  util.RandomMoney(),
+		Currency: util.RandomCurrencies(),
 	}
 
 	account, err := TestQueries.CreateAccount(context.Background(), arg)
@@ -27,7 +27,7 @@ func CreateRandomAccount(t *testing.T) db.Account {
 }
 
 func TestCreateAccount(t *testing.T) {
-	for range 5 {
+	for range 20 {
 		CreateRandomAccount(t)
 	}
 }
