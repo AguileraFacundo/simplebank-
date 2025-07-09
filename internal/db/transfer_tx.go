@@ -55,10 +55,12 @@ func (s *Store) TransferTx(ctx context.Context, arg TransferTxParams) (TransferT
 		// get accounts -> update money
 
 		if arg.FromAccountID < arg.ToAccountID {
-
+			result.FromAccount, result.ToAccount, err = addMoney(ctx, q, arg.FromAccountID, -arg.Amount, arg.ToAccountID, arg.Amount)
+		} else {
+			result.ToAccount, result.FromAccount, err = addMoney(ctx, q, arg.ToAccountID, arg.Amount, arg.FromAccountID, -arg.Amount)
 		}
 
-		return nil
+		return err
 	})
 
 	return result, err
@@ -85,9 +87,6 @@ func addMoney(
 		Amount: amount2,
 		ID:     accountID2,
 	})
-	if err != nil {
-		return
-	}
 
-	return account1, account2, nil
+	return
 }
