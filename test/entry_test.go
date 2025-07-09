@@ -21,7 +21,9 @@ func createRandomEntry(t *testing.T) db.Entry {
 }
 
 func TestCreateEntry(t *testing.T) {
-	createRandomEntry(t)
+	for range 10 {
+		createRandomEntry(t)
+	}
 }
 
 func TestDeleteEntry(t *testing.T) {
@@ -45,7 +47,7 @@ func TestGetEntry(t *testing.T) {
 }
 
 func TestListEntry(t *testing.T) {
-	for range 5 {
+	for range 10 {
 		createRandomEntry(t)
 	}
 	args := db.ListEntriesParams{

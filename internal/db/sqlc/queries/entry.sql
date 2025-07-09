@@ -9,7 +9,8 @@ INSERT INTO entries (
 -- name: GetEntry :one
 SELECT * FROM entries
 WHERE id = $1 
-LIMIT 1;
+LIMIT 1
+FOR NO KEY UPDATE;
 
 
 -- name: ListEntries :many
